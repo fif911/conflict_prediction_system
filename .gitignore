@@ -1,0 +1,9 @@
+*.pdf
+*.dta
+__pycache__
+*.csv
+*.xls
+*.xlsx
+.DS_Store
+.idea
+*.zip

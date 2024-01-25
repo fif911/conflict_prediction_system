@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "world-research"
+version = "0.1.0"
+description = ""
+authors = ["Oleksandr Zakotianskyi <ozakotianskyi@pixsystem.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+matplotlib = "^3.7.2"
+plotly = "^5.16.1"
+openpyxl = "^3.1.2"
+scipy = {version = "1.11.2", python = "=3.9"}
+xlrd = "^2.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
