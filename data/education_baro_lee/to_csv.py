@@ -22,8 +22,14 @@ if __name__ == '__main__':
 
         # Save the transformed data to a CSV file
         csv_file_path = f'{new_column_name.lower().replace(" ", "_")}_by_country_and_year.csv'  # Replace with your desired file path
+        if new_column_name == 'Population':
+            # multiply by 1000 to get the actual population
+            data_pivoted = data_pivoted * 1000
+            data_pivoted.to_csv(csv_file_path, float_format='%.f')
         data_pivoted.to_csv(csv_file_path)
 
 
     read_and_save('Unnamed: 4', 'Human Capital')
+    read_and_save('Unnamed: 5', 'Alternative Human Capital')
+    read_and_save('Unnamed: 6', 'Population')
     print("Done")
