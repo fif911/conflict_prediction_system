@@ -2,8 +2,14 @@ import pandas as pd
 
 if __name__ == '__main__':
     # Load the Excel file
-    file_path = 'LeeLee_HC_MF1564.xls'  # Replace with your file path
-    data_with_headers = pd.read_excel(file_path, skiprows=12)
+    # file_path = 'LeeLee_HC_MF1564.xls'
+    file_path = 'LeeLee_enroll_MF.xls'
+    MODE = 'HC'  # Human Capital
+    skiprows = 13
+    if 'enroll' in file_path:
+        MODE = 'ER'  # Enrollment Rate
+        skiprows = 10
+    data_with_headers = pd.read_excel(file_path, skiprows=skiprows)
 
     # Handling the "Country" column which has NaN values
     # Forward fill the NaN values in the 'Country' column ('Unnamed: 0')
@@ -21,7 +27,7 @@ if __name__ == '__main__':
         data_pivoted = data_cleaned.pivot(index='Country', columns='Year', values=new_column_name)
 
         # Save the transformed data to a CSV file
-        csv_file_path = f'{new_column_name.lower().replace(" ", "_")}_by_country_and_year.csv'  # Replace with your desired file path
+        csv_file_path = f'{MODE.lower()}_{new_column_name.lower().replace(" ", "_")}_by_country_and_year.csv'  # Replace with your desired file path
         if new_column_name == 'Population':
             # multiply by 1000 to get the actual population
             data_pivoted = data_pivoted * 1000
@@ -29,7 +35,15 @@ if __name__ == '__main__':
         data_pivoted.to_csv(csv_file_path)
 
 
-    read_and_save('Unnamed: 4', 'Human Capital')
-    read_and_save('Unnamed: 5', 'Alternative Human Capital')
-    read_and_save('Unnamed: 6', 'Population')
+    if MODE == 'HC':
+        read_and_save('Unnamed: 4', 'Human Capital')
+        read_and_save('Unnamed: 5', 'Alternative Human Capital')
+        read_and_save('Unnamed: 6', 'Population')
+    elif MODE == 'ER':
+        read_and_save('Unnamed: 2', 'Primary Enrollment Rate')
+        read_and_save('Unnamed: 3', 'Secondary Enrollment Rate')
+        read_and_save('Unnamed: 4', 'Tertiary Enrollment Rate')
+    else:
+        raise ValueError(f'Invalid mode: {MODE}')
+
     print("Done")
