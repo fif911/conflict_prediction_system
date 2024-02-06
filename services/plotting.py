@@ -9,7 +9,8 @@ class PlottingService:
         """
         fig = go.Figure()
         for index, row in data.iterrows():
-            country = row['country name']
+            country = row['country name'] if 'country name' in row else row['Country']
+
             fig.add_trace(go.Scatter(x=data.columns[3:], y=row[3:],
                                      mode='lines+markers', name=country))
 
@@ -30,7 +31,7 @@ class PlottingService:
 
         fig = go.Figure()
         for index, row in relative_data.iterrows():
-            country = row['country name']
+            country = row['country name'] if 'country name' in row else row['Country']
             fig.add_trace(go.Scatter(x=relative_data.columns[3:], y=row[3:],
                                      mode='lines+markers', name=country))
 
