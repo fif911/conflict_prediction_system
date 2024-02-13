@@ -1,9 +1,11 @@
 import pandas as pd
 
+file_path = 'LeeLee_HC_MF1564.xls'
+# file_path = 'LeeLee_enroll_MF.xls'
+
 if __name__ == '__main__':
     # Load the Excel file
-    # file_path = 'LeeLee_HC_MF1564.xls'
-    file_path = 'LeeLee_enroll_MF.xls'
+
     MODE = 'HC'  # Human Capital
     skiprows = 13
     if 'enroll' in file_path:
@@ -27,7 +29,7 @@ if __name__ == '__main__':
         data_pivoted = data_cleaned.pivot(index='Country', columns='Year', values=new_column_name)
 
         # Save the transformed data to a CSV file
-        csv_file_path = f'{MODE.lower()}_{new_column_name.lower().replace(" ", "_")}_by_country_and_year.csv'  # Replace with your desired file path
+        csv_file_path = f'{MODE.lower()}_{new_column_name.lower().replace(" ", "_")}_by_country_and_year_{int(min(data_cleaned["Year"]))}_{int(max(data_cleaned["Year"]))}.csv'
         if new_column_name == 'Population':
             # multiply by 1000 to get the actual population
             data_pivoted = data_pivoted * 1000
