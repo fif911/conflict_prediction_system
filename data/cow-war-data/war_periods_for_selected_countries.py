@@ -4,7 +4,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.ticker as plticker
 
-
 # get the list of conflicts for the countries of interest and plot by type of the conflict
 # USA, United Kingdom, Germany, France, Russia, China, Turkey, Netherlands, Spain
 CODES = [2, 200, 255, 220, 365, 710, 640, 210, 230]
@@ -43,8 +42,19 @@ def convert_to_int(ds1, ds2, ds3):
     return ds1, ds2, ds3
 
 
+def remove_commas_and_convert_to_int(ds: pd.DataFrame, columns: list):
+    for column in columns:
+        if ds[column].dtype != np.int64:
+            ds[column] = ds[column].str.replace(',', '').astype(int)
+    return ds
+
+
 def get_major_conflicts_periods(ds1: pd.DataFrame, ds2: pd.DataFrame, ds3: pd.DataFrame):
-    # convert columns to int or 0 if NaN
+    remove_commas_and_convert_to_int(ds1, ['BatDeath', 'NonStateDeaths'])
+    remove_commas_and_convert_to_int(ds2, ['BatDeath'])
+    remove_commas_and_convert_to_int(ds3, ['SideADeaths', 'SideBDeaths'])
+
+    # convert columns to int and set 0 if NaN
     ds1['BatDeath'] = ds1['BatDeath'].fillna(0).astype(int)
     ds1['NonStateDeaths'] = ds1['NonStateDeaths'].fillna(0).astype(int)
     ds2['BatDeath'] = ds2['BatDeath'].fillna(0).astype(int)
@@ -158,7 +168,6 @@ if __name__ == '__main__':
     # In nonstate territory (war type 8)
     # Across state borders (war type 9)
     # ds4 = pd.read_csv('Non-StateWarData_v4.0.csv', encoding='cp1252')
-
 
     ds1, ds2, ds3 = convert_to_int(ds1, ds2, ds3)
 

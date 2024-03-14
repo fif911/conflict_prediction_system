@@ -3,7 +3,7 @@ import pandas as pd
 from services.plotting import plotting_service
 
 # Load the data from the Excel file
-file_path = './UniversitiesFounded_Broad (1).xlsx'
+file_path = 'UniversitiesFounded_Broad 1820-2015.xlsx'
 data = pd.read_excel(file_path)
 
 # Display the first few rows of the dataframe to understand its structure
@@ -25,5 +25,5 @@ cumulative_universities_data = cumulative_universities_data.loc[:, :'2015']
 # save the data to a csv file
 cumulative_universities_data.to_csv('cumulative_universities_founded.csv', index=False)
 
-# plotting_service.plot_absolute(cumulative_universities_data)
-plotting_service.plot_relative(cumulative_universities_data)
+# plotting_service.plot_absolute(cumulative_universities_data, title="Universities Founded absolute")
+plotting_service.plot_relative(cumulative_universities_data, title="Universities Founded relative")

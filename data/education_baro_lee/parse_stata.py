@@ -1,4 +1,4 @@
 import pandas as pd
 
-frame = pd.read_stata('LeeLee_v1.dta')
+frame = pd.read_stata('LeeLee_1870-2010.dta')
 print(frame.head())

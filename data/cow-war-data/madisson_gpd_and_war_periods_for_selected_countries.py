@@ -30,6 +30,10 @@ gdp_ds = pd.read_excel('../Maddison/mpd2020.xlsx', sheet_name='Full data')
 CODES = [2, 200, 255, 220, 365, 710, 640, 210, 230]
 COUNTRIES = ['USA', 'United Kingdom', 'Germany', 'France', 'Russia', 'China', 'Turkey', 'Netherlands', 'Spain']
 MAD_GDP_CODES = ["USA", "GBR", "DEU", "FRA", "SUN", "CHN", "TUR", "NLD", "ESP"]
+# CODES = [640]
+# COUNTRIES = ['Turkey']
+# MAD_GDP_CODES = ["TUR"]
+
 
 MAX_GDP_PER_CAPITA = 60_000
 MAX_GDP = 20_000_000_000
@@ -75,3 +79,4 @@ for ccode, cname, mad_ccode in zip(CODES, COUNTRIES, MAD_GDP_CODES):
     plt.show()
 
 # TODO add data about famines periods and their severity https://ourworldindata.org/famines#the-our-world-in-data-dataset-of-famines
+print("Done")
